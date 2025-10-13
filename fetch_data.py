@@ -15,5 +15,4 @@ def fetch_data (api_url:str, date:str)->pd.DataFrame:
     df['purchase_datetime'] = pd.to_datetime(df['purchase_dt']) + \
         pd.to_timedelta(df['purchase_time_as_seconds_from_midnight'], unit='s') # Преобразуем две колонки с датой и временем в одну
     df = df.drop(['purchase_dt', 'purchase_time_as_seconds_from_midnight'], axis=1) # Удаляем старые колонки с датой и временем
-    print(f"{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Данные загружены за {date}")
     return df
