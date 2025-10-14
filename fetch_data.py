@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import json
 
+# Считаем данные, которые не подходят по структуре ошибочными
 def fetch_data (api_url:str, date:str)->pd.DataFrame:
     """Функция делает запрос к API по api_url и 
     возвращает датафрейм данных за дату date"""
