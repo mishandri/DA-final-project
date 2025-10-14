@@ -53,7 +53,6 @@ try:
     data = fd.fetch_data(api_url, date_str)
     logging.info(f'Данные за {date_str} были добавлены в датасет')
 
-
     # Загрузим данные в PostgreSQL прямо из датасета
     for i, row in data.iterrows():
         # Сразу проверяем на типы данных, чтобы не было проблем со вставкой.
@@ -71,6 +70,7 @@ try:
                             )"""
         try:
             database.post(query)
+            logging.info(f'Данные за {date_str} были добавлены в БД')
         except Exception as err:
             logging.error(f'Ошибка вставки данных. {err}')
 
