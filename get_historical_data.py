@@ -80,9 +80,9 @@ try:
             try:
                 # Загрузим данные в PostgreSQL прямо из датасета, содержащего данные за один день
                 database.post(query)
-                logging.info(f'Данные за {date_str} были добавлены в БД')
             except Exception as err:
                 logging.error(f'Ошибка вставки данных. {err}')
+        logging.info(f'Данные за {date_str} были добавлены в БД')
 
 except Exception as err:
     logging.error(f'Ошибка подключения к БД. {err}')
