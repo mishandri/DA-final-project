@@ -59,36 +59,30 @@ try:
             yield current_date
             current_date += timedelta(days=1)
 
-    historical_data = pd.DataFrame()
     for date in date_range(start_date, end_date):
         date_str = date.strftime("%Y-%m-%d")
         new_data = fd.fetch_data(api_url, date_str)
-        historical_data = pd.concat([historical_data, new_data], ignore_index=True) # Добавляем в датасет новый день
         logging.info(f'Данные за {date_str} были добавлены в датасет')
-
-    # Если нужно сохранить данные в csv, просто раскомментируй строки ниже
-    # historical_data.to_csv('historical.csv', encoding='utf8', index=False) 
-
-    # Загрузим данные в PostgreSQL прямо из датасета
-    
-    for i, row in historical_data.iterrows():
-        # Сразу проверяем на типы данных, чтобы не было проблем со вставкой.
-        # Некорректные данные не будут вставляться
-        query = f"""INSERT INTO project.project_data 
-                    (client_id, gender, product_id, quantity, price_per_item, discount_per_item, total_price, purchase_datetime)
-                    VALUES (CAST('{row['client_id']}' AS INTEGER),
-                            '{row['gender']}', 
-                            CAST('{row['product_id']}' AS INTEGER), 
-                            CAST('{row['quantity']}' AS INTEGER), 
-                            CAST('{row['price_per_item']}' AS DECIMAL(10,2)), 
-                            CAST('{row['discount_per_item']}' AS DECIMAL(10,2)), 
-                            CAST('{row['total_price']}' AS DECIMAL(10,2)),
-                            CAST('{row['purchase_datetime']}' AS TIMESTAMP)
-                            )"""
-        try:
-            database.post(query)
-        except Exception as err:
-            logging.error(f'Ошибка вставки данных. {err}')
+        for i, row in new_data.iterrows():
+            # Сразу проверяем на типы данных, чтобы не было проблем со вставкой.
+            # Некорректные данные не будут вставляться
+            query = f"""INSERT INTO project.project_data 
+                        (client_id, gender, product_id, quantity, price_per_item, discount_per_item, total_price, purchase_datetime)
+                        VALUES (CAST('{row['client_id']}' AS INTEGER),
+                                '{row['gender']}', 
+                                CAST('{row['product_id']}' AS INTEGER), 
+                                CAST('{row['quantity']}' AS INTEGER), 
+                                CAST('{row['price_per_item']}' AS DECIMAL(10,2)), 
+                                CAST('{row['discount_per_item']}' AS DECIMAL(10,2)), 
+                                CAST('{row['total_price']}' AS DECIMAL(10,2)),
+                                CAST('{row['purchase_datetime']}' AS TIMESTAMP)
+                                )"""
+            try:
+                # Загрузим данные в PostgreSQL прямо из датасета, содержащего данные за один день
+                database.post(query)
+                logging.info(f'Данные за {date_str} были добавлены в БД')
+            except Exception as err:
+                logging.error(f'Ошибка вставки данных. {err}')
 
 except Exception as err:
     logging.error(f'Ошибка подключения к БД. {err}')
