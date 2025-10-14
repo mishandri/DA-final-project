@@ -6,7 +6,7 @@ api_url = "http://final-project.simulative.ru/data"
 
 data = pd.DataFrame()
 start_date = datetime.strptime("2022-01-01", "%Y-%m-%d")
-end_date = datetime.strptime("2022-01-07", "%Y-%m-%d")# datetime.today()
+end_date = datetime.strptime("2022-01-02", "%Y-%m-%d")# datetime.today()
 
 # Создадим генератор дат для цикла for
 def date_range(start_date, end_date):
@@ -22,4 +22,11 @@ for date in date_range(start_date, end_date):
     new_data = fd.fetch_data(api_url, date_str)
     historical_data = pd.concat([historical_data, new_data], ignore_index=True) # Добавляем в датасет новый день
     print(f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Данные за {date_str} были добавлены в датасет')
-historical_data.to_csv('historical.csv', encoding='utf8', index=False) # сохраняем в csv
+
+# Если нужно сохранить данные в csv, просто раскомментируй строку ниже
+#historical_data.to_csv('historical.csv', encoding='utf8', index=False) 
+
+# Загрузим данные в PostgreSQL прямо из датасета
+
+for i in range(historical_data.shape[0]):
+    print(historical_data.iloc[i]['client_id'])
