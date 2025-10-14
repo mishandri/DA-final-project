@@ -1,6 +1,23 @@
 from datetime import date, datetime, timedelta
 import pandas as pd
 import fetch_data as fd
+import logging  # Для логирования
+import configparser # Для конфигов
+from pgdb import PGDatabase # Для подключения к БД
+
+# Настройка логера:
+logging.basicConfig(
+    format='%(asctime)s %(levelname)s: %(message)s',
+    level=logging.INFO,
+    encoding='utf-8',
+    filename=f'{dirname}/logs/{today.strftime("%Y-%m-%d")}.log',
+    filemode='a'
+)
+
+# Настройка кофиг-файла
+config = configparser.ConfigParser()
+config.read(os.path.join(dirname, "config.ini"))
+PSQL = config['sql']
 
 api_url = "http://final-project.simulative.ru/data"
 
