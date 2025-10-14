@@ -47,12 +47,10 @@ try:
 
     api_url = "http://final-project.simulative.ru/data"
 
-    data = pd.DataFrame()
     yesterday_date = datetime.today() - timedelta(days=1)
 
     date_str = yesterday_date.strftime("%Y-%m-%d")
-    new_data = fd.fetch_data(api_url, date_str)
-    data = pd.concat([data, new_data], ignore_index=True) # Добавляем в датасет новый день
+    data = fd.fetch_data(api_url, date_str)
     logging.info(f'Данные за {date_str} были добавлены в датасет')
 
 
