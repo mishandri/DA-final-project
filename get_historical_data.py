@@ -41,7 +41,7 @@ try:
         user=PSQL["USER"],
         password=PSQL["PASSWORD"]
     )
-    logging.info(f'Успешное подключения е БД.')
+    logging.info(f'Успешное подключения к БД.')
 
     # Выполняем основную программу
 
@@ -49,7 +49,7 @@ try:
 
     data = pd.DataFrame()
     start_date = datetime.strptime("2022-01-01", "%Y-%m-%d")
-    end_date = datetime.strptime("2022-01-02", "%Y-%m-%d")# datetime.today()
+    end_date = datetime.today()
 
     # Создадим генератор дат для цикла for
     def date_range(start_date, end_date):
@@ -67,12 +67,28 @@ try:
         logging.info(f'Данные за {date_str} были добавлены в датасет')
 
     # Если нужно сохранить данные в csv, просто раскомментируй строки ниже
-    #historical_data.to_csv('historical.csv', encoding='utf8', index=False) 
+    # historical_data.to_csv('historical.csv', encoding='utf8', index=False) 
 
     # Загрузим данные в PostgreSQL прямо из датасета
-
-    for i in range(historical_data.shape[0]):
-        print(historical_data.iloc[i]['client_id'])
+    
+    for i, row in historical_data.iterrows():
+        # Сразу проверяем на типы данных, чтобы не было проблем со вставкой.
+        # Некорректные данные не будут вставляться
+        query = f"""INSERT INTO project.project_data 
+                    (client_id, gender, product_id, quantity, price_per_item, discount_per_item, total_price, purchase_datetime)
+                    VALUES (CAST('{row['client_id']}' AS INTEGER),
+                            '{row['gender']}', 
+                            CAST('{row['product_id']}' AS INTEGER), 
+                            CAST('{row['quantity']}' AS INTEGER), 
+                            CAST('{row['price_per_item']}' AS DECIMAL(10,2)), 
+                            CAST('{row['discount_per_item']}' AS DECIMAL(10,2)), 
+                            CAST('{row['total_price']}' AS DECIMAL(10,2)),
+                            CAST('{row['purchase_datetime']}' AS TIMESTAMP)
+                            )"""
+        try:
+            database.post(query)
+        except Exception as err:
+            logging.error(f'Ошибка вставки данных. {err}')
 
 except Exception as err:
     logging.error(f'Ошибка подключения к БД. {err}')
