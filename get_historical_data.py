@@ -15,9 +15,13 @@ logging.basicConfig(
 )
 
 # Настройка кофиг-файла
-config = configparser.ConfigParser()
-config.read(os.path.join(dirname, "config.ini"))
-PSQL = config['sql']
+# Настройки следует хранить в файле config.ini
+# [sql]
+# HOST=Адрес сервера БД
+# PORT=Порт сервера БД
+# DATABASE=Имя БД
+# USER=Пользователь
+# PASSWORD=Пароль
 
 api_url = "http://final-project.simulative.ru/data"
 
