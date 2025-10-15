@@ -1,3 +1,4 @@
+
 CREATE TABLE project.project_data (
     id SERIAL PRIMARY KEY,
     client_id INTEGER NOT NULL,
@@ -10,3 +11,26 @@ CREATE TABLE project.project_data (
     purchase_datetime TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Проверка на правильность заполнения
+ALTER TABLE project.project_data 
+ADD CONSTRAINT valid_discount CHECK (discount_per_item <= price_per_item),
+ADD CONSTRAINT valid_total_price CHECK (total_price = (price_per_item - discount_per_item) * quantity);
+
+-- Комментарии к таблице и столбцам
+COMMENT ON TABLE project.project_data IS 'Таблица данных о покупках клиентов';
+COMMENT ON COLUMN project.project_data.client_id IS 'Идентификатор клиента';
+COMMENT ON COLUMN project.project_data.gender IS 'Пол клиента (M/F)';
+COMMENT ON COLUMN project.project_data.product_id IS 'Идентификатор товара';
+COMMENT ON COLUMN project.project_data.quantity IS 'Количество товаров в покупке';
+COMMENT ON COLUMN project.project_data.price_per_item IS 'Цена за единицу товара (в денежных единицах)';
+COMMENT ON COLUMN project.project_data.discount_per_item IS 'Скидка на единицу товара (в денежных единицах)';
+COMMENT ON COLUMN project.project_data.total_price IS 'Общая стоимость покупки';
+COMMENT ON COLUMN project.project_data.purchase_datetime IS 'Дата и время покупки';
+COMMENT ON COLUMN project.project_data.created_at IS 'Дата создания записи в базе';
+
+-- Создание индексов для улучшения производительности
+CREATE INDEX idx_project_data_client_id ON project.project_data(client_id);
+CREATE INDEX idx_project_data_product_id ON project.project_data(product_id);
+CREATE INDEX idx_project_data_purchase_datetime ON project.project_data(purchase_datetime);
+CREATE INDEX idx_project_data_client_product ON project.project_data(client_id, product_id);
