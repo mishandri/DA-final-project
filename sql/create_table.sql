@@ -51,13 +51,15 @@ CREATE VIEW project.abc_analysis AS
 WITH product_stats AS (
   SELECT 
     product_id,
+    DATE(purchase_datetime) as purchase_date, 
     SUM(quantity) as total_quantity,
     SUM(total_price) as total_revenue
-  FROM project.project_data 
-  GROUP BY product_id
+  FROM project.project_data
+  GROUP BY product_id, DATE(purchase_datetime)
 )
 SELECT 
   product_id,
+  purchase_date,
   total_quantity,
   total_revenue,
   CASE 
@@ -73,3 +75,32 @@ SELECT
 FROM product_stats
 ORDER BY total_revenue DESC
 )
+
+-- Вообще, я использовал этот запрос для формирования SQL-датасетя с параметрами прямо в DataLens
+WITH product_stats AS (
+  SELECT 
+    product_id,
+    DATE(purchase_datetime) as purchase_date, 
+    SUM(quantity) as total_quantity,
+    SUM(total_price) as total_revenue
+  FROM project.project_data 
+  WHERE TRUE AND DATE(purchase_datetime) >= DATE('{{start_date}}') 
+             AND DATE(purchase_datetime) <= DATE('{{end_date}}')
+  GROUP BY product_id, DATE(purchase_datetime)
+)
+SELECT
+  product_id,
+  total_quantity,
+  total_revenue,
+  CASE 
+    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.8 THEN 'A'
+    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.95 THEN 'B' 
+    ELSE 'C'
+  END as abc_quantity,
+  CASE 
+    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.8 THEN 'A'
+    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.95 THEN 'B' 
+    ELSE 'C'
+  END as abc_total_price
+FROM product_stats
+ORDER BY total_revenue DESC
