@@ -44,3 +44,29 @@ SELECT
     date(purchase_datetime) AS purchase_date 
 FROM project.project_data
 )
+
+-- Запрос для ABC анализа
+WITH product_stats AS (
+  SELECT 
+    product_id,
+    SUM(quantity) as total_quantity,
+    SUM(total_price) as total_revenue
+  FROM project.project_data 
+  GROUP BY product_id
+)
+SELECT 
+  product_id,
+  total_quantity,
+  total_revenue,
+  CASE 
+    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.8 THEN 'A'
+    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.95 THEN 'B' 
+    ELSE 'C'
+  END as abc_quantity,
+  CASE 
+    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.8 THEN 'A'
+    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.95 THEN 'B' 
+    ELSE 'C'
+  END as abc_total_price
+FROM product_stats
+ORDER BY total_revenue DESC;
