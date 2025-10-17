@@ -46,6 +46,8 @@ FROM project.project_data
 )
 
 -- Запрос для ABC анализа
+CREATE VIEW project.abc_analysis AS
+(
 WITH product_stats AS (
   SELECT 
     product_id,
@@ -69,4 +71,5 @@ SELECT
     ELSE 'C'
   END as abc_total_price
 FROM product_stats
-ORDER BY total_revenue DESC;
+ORDER BY total_revenue DESC
+)
