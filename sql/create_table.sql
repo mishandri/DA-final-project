@@ -34,3 +34,13 @@ CREATE INDEX idx_project_data_client_id ON project.project_data(client_id);
 CREATE INDEX idx_project_data_product_id ON project.project_data(product_id);
 CREATE INDEX idx_project_data_purchase_datetime ON project.project_data(purchase_datetime);
 CREATE INDEX idx_project_data_client_product ON project.project_data(client_id, product_id);
+
+-- Вьюшка для когортного анализа
+CREATE VIEW project.cohort_analysis AS
+(
+SELECT
+    client_id,
+    min(date(purchase_datetime)) OVER (PARTITION BY client_id ORDER BY purchase_datetime) AS purchase_min_date,
+    date(purchase_datetime) AS purchase_date 
+FROM project.project_data
+)
