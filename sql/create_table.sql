@@ -77,30 +77,68 @@ ORDER BY total_revenue DESC
 )
 
 -- Вообще, я использовал этот запрос для формирования SQL-датасетя с параметрами прямо в DataLens
-WITH product_stats AS (
+WITH product_sales AS (
   SELECT 
     product_id,
-    DATE(purchase_datetime) as purchase_date, 
-    SUM(quantity) as total_quantity,
-    SUM(total_price) as total_revenue
+    DATE_TRUNC('{{scale_xyz}}', DATE(purchase_datetime)) as sales_month,
+    SUM(quantity) as quantity,
+    SUM(total_price) as revenue
   FROM project.project_data 
   WHERE TRUE AND DATE(purchase_datetime) >= DATE('{{start_date}}') 
              AND DATE(purchase_datetime) <= DATE('{{end_date}}')
-  GROUP BY product_id, DATE(purchase_datetime)
+  GROUP BY product_id, DATE_TRUNC('{{scale_xyz}}', DATE(purchase_datetime))
+),
+product_stats AS (
+  SELECT 
+    product_id,
+    SUM(quantity) as total_quantity,
+    SUM(revenue) as total_revenue,
+    -- Статистика для XYZ анализа
+    COUNT(DISTINCT sales_month) as active_months,
+    -- Коэффициент вариации (для XYZ)
+    CASE 
+      WHEN AVG(revenue) > 0 THEN STDDEV(revenue) / AVG(revenue)
+      ELSE 1 
+    END as variation_coefficient
+  FROM product_sales
+  GROUP BY product_id
+  HAVING COUNT(DISTINCT sales_month) >= 2  -- Минимум 2 месяца данных для анализа
+),
+abc_analysis AS (
+  SELECT 
+    product_id,
+    total_quantity,
+    total_revenue,
+    active_months,
+    variation_coefficient,
+    -- ABC по количеству
+    SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() as quantity_cumulative,
+    -- ABC по выручке
+    SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() as revenue_cumulative
+  FROM product_stats
 )
 SELECT
   product_id,
   total_quantity,
   total_revenue,
+  -- ABC анализ
   CASE 
-    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.8 THEN 'A'
-    WHEN SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() <= 0.95 THEN 'B' 
+    WHEN quantity_cumulative <= 0.8 THEN 'A'
+    WHEN quantity_cumulative <= 0.95 THEN 'B' 
     ELSE 'C'
   END as abc_quantity,
   CASE 
-    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.8 THEN 'A'
-    WHEN SUM(total_revenue) OVER(ORDER BY total_revenue DESC) / SUM(total_revenue) OVER() <= 0.95 THEN 'B' 
+    WHEN revenue_cumulative <= 0.8 THEN 'A'
+    WHEN revenue_cumulative <= 0.95 THEN 'B' 
     ELSE 'C'
-  END as abc_total_price
-FROM product_stats
+  END as abc_total_price,
+  -- XYZ анализ
+  CASE 
+    WHEN variation_coefficient <= 0.1 THEN 'X'
+    WHEN variation_coefficient <= 0.25 THEN 'Y'
+    ELSE 'Z'
+  END as xyz_category,
+  -- Дополнительные метрики
+  active_months
+FROM abc_analysis
 ORDER BY total_revenue DESC
