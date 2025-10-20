@@ -130,3 +130,34 @@ SELECT
   purchase_date
 FROM cohort_data
 ORDER BY client_id, purchase_date
+
+-- Запрос в DataLens для LTV с параметрами
+WITH first_purchases AS (
+  SELECT 
+    client_id,
+    DATE_TRUNC('month', MIN(purchase_datetime)) as cohort
+  FROM project.project_data
+  WHERE purchase_datetime::date >= '{{start_date}}' 
+    AND purchase_datetime::date <= '{{end_date}}'
+  GROUP BY client_id
+),
+cohort_data AS (
+  SELECT 
+    fp.cohort,
+    DATE_TRUNC('month', p.purchase_datetime) as month,
+    p.client_id,
+    p.total_price
+  FROM project.project_data p
+  JOIN first_purchases fp ON p.client_id = fp.client_id
+  WHERE p.purchase_datetime::date >= '{{start_date}}' 
+    AND p.purchase_datetime::date <= '{{end_date}}'
+)
+SELECT 
+  cohort,
+  month,
+  SUM(total_price) as revenue,
+  COUNT(DISTINCT client_id) as unique_clients_count,
+  ROUND(SUM(total_price) / NULLIF(COUNT(DISTINCT client_id), 0), 2) as avg_revenue
+FROM cohort_data
+GROUP BY cohort, month
+ORDER BY cohort, month
