@@ -59,7 +59,7 @@ da-final-project/
 
 # Ссылки
 
-[Дашборд в Yandex.DataLens](https://datalens.yandex/6eiukr5xyukyr)      |       [Исследование продаж 2023 года]()
+[Дашборд в Yandex.DataLens](https://datalens.yandex/6eiukr5xyukyr)      |       [Исследование продаж 2023 года](https://github.com/mishandri/DA-final-project/blob/main/DataAnalysis2023.pdf)
 
 # Примечения
 
