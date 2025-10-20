@@ -4,7 +4,8 @@ WITH product_sales AS (
     product_id,
     DATE_TRUNC('{{scale_xyz}}', DATE(purchase_datetime)) as sales_month,
     SUM(quantity) as quantity,
-    SUM(total_price) as revenue
+    SUM(discount_per_item) as discount,
+    SUM(total_price) as revenue 
   FROM project.project_data 
   WHERE TRUE AND DATE(purchase_datetime) >= DATE('{{start_date}}') 
              AND DATE(purchase_datetime) <= DATE('{{end_date}}')
@@ -15,6 +16,7 @@ product_stats AS (
     product_id,
     SUM(quantity) as total_quantity,
     SUM(revenue) as total_revenue,
+    SUM(discount) AS discount,
     -- Статистика для XYZ анализа
     COUNT(DISTINCT sales_month) as active_months,
     -- Коэффициент вариации (для XYZ)
@@ -32,6 +34,7 @@ abc_analysis AS (
     total_quantity,
     total_revenue,
     active_months,
+    discount,
     variation_coefficient,
     -- ABC по количеству
     SUM(total_quantity) OVER(ORDER BY total_quantity DESC) / SUM(total_quantity) OVER() as quantity_cumulative,
@@ -43,6 +46,8 @@ SELECT
   product_id,
   total_quantity,
   total_revenue,
+  discount,
+  variation_coefficient,
   -- ABC анализ
   CASE 
     WHEN quantity_cumulative <= 0.8 THEN 'A'
