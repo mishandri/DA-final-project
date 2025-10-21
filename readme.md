@@ -59,7 +59,7 @@ da-final-project/
 
 # Ссылки
 
-[Дашборд в Yandex.DataLens (тёмная тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=dark)      |       [Дашборд в Yandex.DataLens(светлая тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=light)      |       [Исследование продаж 2023 года](https://github.com/mishandri/DA-final-project/blob/main/DataAnalysis2023.pdf)
+[Дашборд в Yandex.DataLens (тёмная тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=dark)      |       [Дашборд в Yandex.DataLens(светлая тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=light)      |       [Исследование продаж 2023 года](DataAnalysis2023.pdf)
 
 # Примечения
 
