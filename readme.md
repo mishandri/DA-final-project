@@ -2,7 +2,7 @@
 
 ## Описание проекта
 
-Проект реализует полный цикл автоматизированного сбора данных по API, их загрузку в PostgreSQL-базу и визуализацию ключевых метрик через Yandex DataLens.
+Проект реализует полный цикл автоматизированного сбора данных по API, их загрузку в БД PostgreSQL и визуализацию ключевых метрик через Yandex DataLens.
 
 Цель - обеспечить стабильный поток данных для аналитики клиентской активности, продаж и ассортиментной матрицы.
 
@@ -59,7 +59,7 @@ da-final-project/
 
 # Ссылки
 
-[Дашборд в Yandex.DataLens](https://datalens.yandex/6eiukr5xyukyr)      |       [Исследование продаж 2023 года](https://github.com/mishandri/DA-final-project/blob/main/DataAnalysis2023.pdf)
+[Дашборд в Yandex.DataLens (тёмная тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=dark)      |       [Дашборд в Yandex.DataLens(светлая тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=light)      |       [Исследование продаж 2023 года](https://github.com/mishandri/DA-final-project/blob/main/DataAnalysis2023.pdf)
 
 # Примечения
 
