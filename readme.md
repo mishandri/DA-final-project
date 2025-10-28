@@ -12,7 +12,7 @@
 da-final-project/
 ├── .venv/                      # виртуальное окружение (скрыто)
 ├── DataLens/
-│   ├── DataLens_Backup.json    # Бэкап для DataLens
+│   └── DataLens_Backup.json    # Бэкап для DataLens
 ├── img/                        # скриншоты дашборда
 │   ├── dark_theme/             # тёмная тема
 │   └── light_theme/            # светлая тема
