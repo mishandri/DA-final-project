@@ -11,6 +11,8 @@
 ```
 da-final-project/
 ├── .venv/                      # виртуальное окружение (скрыто)
+├── DataLens/
+│   ├── DataLens_Backup.json    # Бэкап для DataLens
 ├── img/                        # скриншоты дашборда
 │   ├── dark_theme/             # тёмная тема
 │   └── light_theme/            # светлая тема
@@ -67,6 +69,7 @@ da-final-project/
 # Примечения
 
 - Корректность данных и их заполнения производится на уровне PostgreSQL:
+
   ```pgsql
   ALTER TABLE project.project_data 
   ADD CONSTRAINT valid_discount CHECK (discount_per_item <= price_per_item),
@@ -75,17 +78,18 @@ da-final-project/
 - Сервер слабенький, всего 1 процессор и 2ГБ ОЗУ, поэтому некоторые чарты могут грузиться долго.
 - В целях экономии ресурсов, в самом DataLens выставлены настройки обновления кэша 1 раз в сутки + выставлена загрузка максимум 3-х чартов за раз.
 - Дополнительно, для ускорения выполнения запросов, были построены индексы для:
+
   - client_id
   - product_id
   - purchase_datetime
   - (client_id, product_id)
+
   ```pgsql
     CREATE INDEX idx_project_data_client_id ON project.project_data(client_id);
     CREATE INDEX idx_project_data_product_id ON project.project_data(product_id);
     CREATE INDEX idx_project_data_purchase_datetime ON project.project_data(purchase_datetime);
     CREATE INDEX idx_project_data_client_product ON project.project_data(client_id, product_id);
   ```
-
 - У некоторых чартов есть символ `?`, который даёт некоторые пояснения. Кроме того, некоторые элементы чартов при наведении курсора мышки выдают всплывающие подсказки.
 - На каждой вкладке дашборда есть описание и цель вкладки, после прочтения можно свернуть.
 - Сверху каждой вкладки закреплены селекторы, которые позволяют выбрать период и/или масштаб исследования.
