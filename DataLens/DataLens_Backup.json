@@ -902,20 +902,41 @@
                     "widget": {
                         "data": {
                             "shared": {
-                                "sort": [
-                                    {
-                                        "guid": "c290da30-ad2a-11f0-88f2-97ac2fcf2434",
-                                        "type": "DIMENSION",
-                                        "title": "rfm",
-                                        "source": "",
-                                        "data_type": "string",
-                                        "datasetId": "0",
-                                        "direction": "DESC"
-                                    }
-                                ],
+                                "sort": [],
                                 "type": "datalens",
                                 "links": [],
-                                "colors": [],
+                                "colors": [
+                                    {
+                                        "id": "inserted-1761673651744",
+                                        "cast": "string",
+                                        "guid": "c290da30-ad2a-11f0-88f2-97ac2fcf2434",
+                                        "type": "DIMENSION",
+                                        "local": true,
+                                        "title": "rfm",
+                                        "valid": true,
+                                        "hidden": false,
+                                        "source": "",
+                                        "formula": "STR([r]*100+[f]*10+[m])",
+                                        "virtual": false,
+                                        "avatar_id": null,
+                                        "calc_mode": "formula",
+                                        "data_type": "string",
+                                        "datasetId": "0",
+                                        "managed_by": "user",
+                                        "aggregation": "none",
+                                        "datasetName": "RMF-анализ",
+                                        "description": "",
+                                        "ui_settings": "",
+                                        "guid_formula": "STR([r_kplf]*100+[f_ut86]*10+[m_eqpa])",
+                                        "default_value": null,
+                                        "autoaggregated": false,
+                                        "lock_aggregation": false,
+                                        "value_constraint": null,
+                                        "initial_data_type": "string",
+                                        "aggregation_locked": true,
+                                        "has_auto_aggregation": false
+                                    }
+                                ],
                                 "labels": [],
                                 "shapes": [],
                                 "filters": [],
@@ -988,7 +1009,14 @@
                                     "0"
                                 ],
                                 "hierarchies": [],
-                                "colorsConfig": {},
+                                "colorsConfig": {
+                                    "palette": "emerald20",
+                                    "colorMode": "palette",
+                                    "fieldGuid": "c290da30-ad2a-11f0-88f2-97ac2fcf2434",
+                                    "mountedColors": {},
+                                    "polygonBorders": "show",
+                                    "coloredByMeasure": false
+                                },
                                 "shapesConfig": {},
                                 "extraSettings": {
                                     "feed": "",
@@ -1012,21 +1040,19 @@
                                     "indicatorTitleMode": "by-field"
                                 },
                                 "visualization": {
-                                    "id": "column",
-                                    "name": "label_visualization-column",
-                                    "type": "column",
-                                    "allowSort": true,
+                                    "id": "treemap",
+                                    "name": "label_visualization-treemap",
+                                    "type": "treemap",
                                     "iconProps": {
-                                        "id": "visColumn",
+                                        "id": "visTreemap",
                                         "width": "24"
                                     },
                                     "allowColors": true,
-                                    "allowLabels": true,
                                     "allowFilters": true,
                                     "placeholders": [
                                         {
-                                            "id": "x",
-                                            "type": "x",
+                                            "id": "dimensions",
+                                            "type": "dimensions",
                                             "items": [
                                                 {
                                                     "id": "dimension-1",
@@ -1040,6 +1066,7 @@
                                                     "source": "",
                                                     "formula": "STR([r]*100+[f]*10+[m])",
                                                     "virtual": false,
+                                                    "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "string",
                                                     "datasetId": "0",
@@ -1058,42 +1085,26 @@
                                                     "description": "",
                                                     "ui_settings": "",
                                                     "guid_formula": "STR([r_kplf]*100+[f_ut86]*10+[m_eqpa])",
+                                                    "default_value": null,
                                                     "hideLabelMode": "show",
                                                     "autoaggregated": false,
                                                     "lock_aggregation": false,
+                                                    "value_constraint": null,
                                                     "initial_data_type": "string",
                                                     "aggregation_locked": true,
                                                     "has_auto_aggregation": false
                                                 }
                                             ],
-                                            "title": "section_x",
-                                            "capacity": 2,
-                                            "required": false,
-                                            "settings": {
-                                                "grid": "off",
-                                                "type": "linear",
-                                                "title": "manual",
-                                                "gridStep": "auto",
-                                                "holidays": "off",
-                                                "hideLabels": "no",
-                                                "labelsView": "auto",
-                                                "titleValue": "Группа RFM",
-                                                "axisModeMap": {
-                                                    "c290da30-ad2a-11f0-88f2-97ac2fcf2434": "discrete"
-                                                },
-                                                "gridStepValue": 50,
-                                                "axisFormatMode": "auto",
-                                                "axisVisibility": "show",
-                                                "axisLabelFormating": {},
-                                                "axisLabelDateFormat": "DD.MM.YYYY"
-                                            },
+                                            "title": "section_dimensions",
+                                            "required": true,
+                                            "settings": {},
                                             "iconProps": {},
                                             "allowedTypes": {},
                                             "allowedDataTypes": {}
                                         },
                                         {
-                                            "id": "y",
-                                            "type": "y",
+                                            "id": "measures",
+                                            "type": "measures",
                                             "items": [
                                                 {
                                                     "id": "measure-0",
@@ -1127,47 +1138,28 @@
                                                     "ui_settings": "",
                                                     "guid_formula": "",
                                                     "quickFormula": true,
+                                                    "default_value": null,
                                                     "hideLabelMode": "show",
                                                     "originalTitle": "client_id",
                                                     "autoaggregated": false,
                                                     "lock_aggregation": false,
+                                                    "value_constraint": null,
                                                     "initial_data_type": "integer",
                                                     "aggregation_locked": false,
                                                     "has_auto_aggregation": false
                                                 }
                                             ],
-                                            "title": "section_y",
-                                            "settings": {
-                                                "grid": "on",
-                                                "type": "linear",
-                                                "nulls": "ignore",
-                                                "scale": "auto",
-                                                "title": "manual",
-                                                "gridStep": "auto",
-                                                "hideLabels": "no",
-                                                "labelsView": "auto",
-                                                "scaleValue": "min-max",
-                                                "titleValue": "Количество клиентов",
-                                                "axisModeMap": {
-                                                    "2c972fb0-ad2b-11f0-88f2-97ac2fcf2434": "continuous"
-                                                },
-                                                "gridStepValue": 50,
-                                                "axisFormatMode": "auto",
-                                                "axisVisibility": "show",
-                                                "axisLabelFormating": {},
-                                                "axisLabelDateFormat": "DD.MM.YYYY"
-                                            },
+                                            "title": "section_size",
+                                            "capacity": 1,
+                                            "required": true,
+                                            "settings": {},
                                             "iconProps": {},
                                             "allowedTypes": {},
                                             "allowedDataTypes": {},
                                             "allowedFinalTypes": {}
                                         }
                                     ],
-                                    "allowSegments": true,
-                                    "allowLayerFilters": false,
-                                    "availableLabelModes": [
-                                        "absolute"
-                                    ]
+                                    "allowLayerFilters": false
                                 },
                                 "geopointsConfig": {},
                                 "datasetsPartialFields": [
@@ -19045,442 +19037,6 @@
                                     {
                                         "field": {
                                             "cast": "float",
-                                            "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
-                                            "type": "MEASURE",
-                                            "local": true,
-                                            "title": "%_values",
-                                            "valid": true,
-                                            "hidden": false,
-                                            "source": "",
-                                            "formula": "[values]/[max_cohort_value]",
-                                            "virtual": false,
-                                            "calc_mode": "formula",
-                                            "data_type": "float",
-                                            "datasetId": "44",
-                                            "managed_by": "user",
-                                            "aggregation": "none",
-                                            "description": "",
-                                            "ui_settings": "",
-                                            "guid_formula": "[7bb51810-ad75-11f0-bd90-472eac6f2805]/[a7ada7c0-ad75-11f0-bd90-472eac6f2805]",
-                                            "autoaggregated": true,
-                                            "lock_aggregation": false,
-                                            "initial_data_type": "float",
-                                            "aggregation_locked": true,
-                                            "has_auto_aggregation": true
-                                        },
-                                        "action": "add_field"
-                                    },
-                                    {
-                                        "field": {
-                                            "cast": "integer",
-                                            "guid": "7bb51810-ad75-11f0-bd90-472eac6f2805",
-                                            "type": "MEASURE",
-                                            "local": true,
-                                            "title": "values",
-                                            "valid": true,
-                                            "hidden": false,
-                                            "source": "",
-                                            "formula": "COUNTD([client_id])",
-                                            "virtual": false,
-                                            "calc_mode": "formula",
-                                            "data_type": "integer",
-                                            "datasetId": "44",
-                                            "managed_by": "user",
-                                            "aggregation": "none",
-                                            "description": "",
-                                            "ui_settings": "",
-                                            "guid_formula": "COUNTD([client_id_3d2i])",
-                                            "autoaggregated": true,
-                                            "lock_aggregation": false,
-                                            "initial_data_type": "integer",
-                                            "aggregation_locked": true,
-                                            "has_auto_aggregation": true
-                                        },
-                                        "action": "add_field",
-                                        "debug_info": "merged-update"
-                                    },
-                                    {
-                                        "field": {
-                                            "cast": "integer",
-                                            "guid": "a7ada7c0-ad75-11f0-bd90-472eac6f2805",
-                                            "type": "MEASURE",
-                                            "local": true,
-                                            "title": "max_cohort_value",
-                                            "valid": true,
-                                            "hidden": false,
-                                            "source": "",
-                                            "formula": "MAX(COUNTD([client_id]) WITHIN [purchase_month])",
-                                            "virtual": false,
-                                            "calc_mode": "formula",
-                                            "data_type": "integer",
-                                            "datasetId": "44",
-                                            "managed_by": "user",
-                                            "aggregation": "none",
-                                            "description": "",
-                                            "ui_settings": "",
-                                            "guid_formula": "MAX(COUNTD([client_id_3d2i]) WITHIN [b558d3c0-ab56-11f0-864e-7555cf0e0fb2])",
-                                            "autoaggregated": true,
-                                            "lock_aggregation": false,
-                                            "initial_data_type": "integer",
-                                            "aggregation_locked": true,
-                                            "has_auto_aggregation": true
-                                        },
-                                        "action": "add_field",
-                                        "debug_info": "merged-update"
-                                    }
-                                ],
-                                "version": "14",
-                                "segments": [],
-                                "tooltips": [],
-                                "datasetsIds": [
-                                    "44"
-                                ],
-                                "hierarchies": [],
-                                "colorsConfig": {},
-                                "shapesConfig": {},
-                                "extraSettings": {
-                                    "feed": "",
-                                    "title": "Анализ клиентов - Таблица. Когортный анализ",
-                                    "totals": "off",
-                                    "stacking": "on",
-                                    "zoomMode": "auto",
-                                    "titleMode": "hide",
-                                    "legendMode": "show",
-                                    "tooltipSum": "on",
-                                    "mapCenterMode": "auto",
-                                    "pivotFallback": "off",
-                                    "pivotInlineSort": "on",
-                                    "navigatorSettings": {
-                                        "selectedLines": [],
-                                        "isNavigatorAvailable": false
-                                    },
-                                    "indicatorTitleMode": "by-field"
-                                },
-                                "visualization": {
-                                    "id": "pivotTable",
-                                    "name": "label_visualization-pivot-table",
-                                    "type": "table",
-                                    "allowSort": true,
-                                    "iconProps": {
-                                        "id": "visPivot",
-                                        "width": "24"
-                                    },
-                                    "allowColors": true,
-                                    "allowFilters": true,
-                                    "placeholders": [
-                                        {
-                                            "id": "pivot-table-columns",
-                                            "type": "pivot-table-columns",
-                                            "items": [
-                                                {
-                                                    "id": "dimension-6",
-                                                    "cast": "integer",
-                                                    "guid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a",
-                                                    "type": "DIMENSION",
-                                                    "title": "diff_months",
-                                                    "valid": true,
-                                                    "hidden": false,
-                                                    "source": "",
-                                                    "formula": "DATEPART(DATE(INT([purchase_date])-INT([purchase_min_date])), 'month') + [diff_years]*12",
-                                                    "virtual": false,
-                                                    "avatar_id": null,
-                                                    "calc_mode": "formula",
-                                                    "data_type": "integer",
-                                                    "datasetId": "44",
-                                                    "fakeTitle": "Количество месяцев с первой покупки",
-                                                    "formatting": {
-                                                        "format": "number",
-                                                        "prefix": "",
-                                                        "postfix": "",
-                                                        "labelMode": "absolute",
-                                                        "precision": 0,
-                                                        "showRankDelimiter": true
-                                                    },
-                                                    "managed_by": "user",
-                                                    "aggregation": "none",
-                                                    "datasetName": "Когортный анализ",
-                                                    "description": "",
-                                                    "ui_settings": "",
-                                                    "guid_formula": "DATEPART(DATE(INT([purchase_date_n7ct])-INT([purchase_min_date_fass])), 'month') + [cb015f40-ab55-11f0-8bf9-3590e82fd31a]*12",
-                                                    "default_value": null,
-                                                    "hideLabelMode": "show",
-                                                    "autoaggregated": false,
-                                                    "lock_aggregation": false,
-                                                    "value_constraint": null,
-                                                    "initial_data_type": "integer",
-                                                    "subTotalsSettings": {
-                                                        "enabled": false
-                                                    },
-                                                    "aggregation_locked": true,
-                                                    "backgroundSettings": {
-                                                        "enabled": false,
-                                                        "settings": {
-                                                            "isContinuous": false,
-                                                            "paletteState": {
-                                                                "palette": "",
-                                                                "mountedColors": {}
-                                                            },
-                                                            "gradientState": {}
-                                                        },
-                                                        "settingsId": "bb867620-ad91-11f0-bdb4-4ddb9de3a292",
-                                                        "colorFieldGuid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a"
-                                                    },
-                                                    "has_auto_aggregation": false
-                                                }
-                                            ],
-                                            "title": "section_columns",
-                                            "settings": {},
-                                            "iconProps": {},
-                                            "allowedTypes": {},
-                                            "allowedDataTypes": {}
-                                        },
-                                        {
-                                            "id": "rows",
-                                            "type": "rows",
-                                            "items": [
-                                                {
-                                                    "id": "dimension-4",
-                                                    "cast": "string",
-                                                    "guid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2",
-                                                    "type": "DIMENSION",
-                                                    "title": "purchase_month",
-                                                    "valid": true,
-                                                    "hidden": false,
-                                                    "source": "",
-                                                    "formula": "IF MONTH([purchase_min_date]) <= 9\r\nTHEN\r\n    STR(YEAR([purchase_min_date])) + '-0' + STR(MONTH([purchase_min_date]))\r\nELSE\r\n    STR(YEAR([purchase_min_date])) + '-' + STR(MONTH([purchase_min_date]))\r\nEND",
-                                                    "virtual": false,
-                                                    "avatar_id": null,
-                                                    "calc_mode": "formula",
-                                                    "data_type": "string",
-                                                    "datasetId": "44",
-                                                    "fakeTitle": "Когорта (месяц)",
-                                                    "formatting": {
-                                                        "format": "number",
-                                                        "prefix": "",
-                                                        "postfix": "",
-                                                        "labelMode": "absolute",
-                                                        "precision": 0,
-                                                        "showRankDelimiter": true
-                                                    },
-                                                    "managed_by": "user",
-                                                    "aggregation": "none",
-                                                    "datasetName": "Когортный анализ",
-                                                    "description": "",
-                                                    "ui_settings": "",
-                                                    "guid_formula": "IF MONTH([purchase_min_date_fass]) <= 9\r\nTHEN\r\n    STR(YEAR([purchase_min_date_fass])) + '-0' + STR(MONTH([purchase_min_date_fass]))\r\nELSE\r\n    STR(YEAR([purchase_min_date_fass])) + '-' + STR(MONTH([purchase_min_date_fass]))\r\nEND",
-                                                    "default_value": null,
-                                                    "hideLabelMode": "show",
-                                                    "autoaggregated": false,
-                                                    "lock_aggregation": false,
-                                                    "value_constraint": null,
-                                                    "initial_data_type": "string",
-                                                    "subTotalsSettings": {
-                                                        "enabled": false
-                                                    },
-                                                    "aggregation_locked": true,
-                                                    "backgroundSettings": {
-                                                        "enabled": false,
-                                                        "settings": {
-                                                            "isContinuous": false,
-                                                            "paletteState": {
-                                                                "palette": "",
-                                                                "mountedColors": {}
-                                                            },
-                                                            "gradientState": {}
-                                                        },
-                                                        "settingsId": "b167fa10-ad91-11f0-bdb4-4ddb9de3a292",
-                                                        "colorFieldGuid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2"
-                                                    },
-                                                    "has_auto_aggregation": false
-                                                }
-                                            ],
-                                            "title": "section_rows",
-                                            "settings": {},
-                                            "iconProps": {},
-                                            "allowedDataTypes": {}
-                                        },
-                                        {
-                                            "id": "measures",
-                                            "type": "measures",
-                                            "items": [
-                                                {
-                                                    "id": "measure-2",
-                                                    "cast": "float",
-                                                    "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
-                                                    "type": "MEASURE",
-                                                    "local": true,
-                                                    "title": "%_values",
-                                                    "valid": true,
-                                                    "hidden": false,
-                                                    "source": "",
-                                                    "formula": "[values]/[max_cohort_value]",
-                                                    "virtual": false,
-                                                    "avatar_id": null,
-                                                    "calc_mode": "formula",
-                                                    "data_type": "float",
-                                                    "datasetId": "44",
-                                                    "fakeTitle": "% от первого периода",
-                                                    "formatting": {
-                                                        "format": "percent",
-                                                        "prefix": "",
-                                                        "postfix": "",
-                                                        "labelMode": "absolute",
-                                                        "precision": 2,
-                                                        "showRankDelimiter": true
-                                                    },
-                                                    "managed_by": "user",
-                                                    "aggregation": "none",
-                                                    "datasetName": "Когортный анализ",
-                                                    "description": "",
-                                                    "ui_settings": "",
-                                                    "barsSettings": {
-                                                        "align": "default",
-                                                        "scale": {
-                                                            "mode": "auto"
-                                                        },
-                                                        "enabled": false,
-                                                        "showLabels": true,
-                                                        "colorSettings": {
-                                                            "settings": {
-                                                                "negativeColorIndex": 1,
-                                                                "positiveColorIndex": 2
-                                                            },
-                                                            "colorType": "two-color"
-                                                        },
-                                                        "showBarsInTotals": false
-                                                    },
-                                                    "guid_formula": "[7bb51810-ad75-11f0-bd90-472eac6f2805]/[a7ada7c0-ad75-11f0-bd90-472eac6f2805]",
-                                                    "default_value": null,
-                                                    "hideLabelMode": "show",
-                                                    "autoaggregated": true,
-                                                    "lock_aggregation": false,
-                                                    "value_constraint": null,
-                                                    "initial_data_type": "float",
-                                                    "aggregation_locked": true,
-                                                    "backgroundSettings": {
-                                                        "enabled": true,
-                                                        "settings": {
-                                                            "isContinuous": true,
-                                                            "paletteState": {},
-                                                            "gradientState": {
-                                                                "reversed": false,
-                                                                "gradientMode": "3-point",
-                                                                "leftThreshold": "0",
-                                                                "rightThreshold": "1",
-                                                                "thresholdsMode": "manual",
-                                                                "gradientPalette": "red-orange-green",
-                                                                "middleThreshold": ".5"
-                                                            }
-                                                        },
-                                                        "settingsId": "e3d23e60-ad79-11f0-8c0c-5b3e50c599e8",
-                                                        "colorFieldGuid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8"
-                                                    },
-                                                    "has_auto_aggregation": true
-                                                }
-                                            ],
-                                            "title": "section_measures",
-                                            "settings": {},
-                                            "iconProps": {},
-                                            "allowedTypes": {},
-                                            "allowedFinalTypes": {}
-                                        }
-                                    ],
-                                    "allowLayerFilters": false
-                                },
-                                "geopointsConfig": {},
-                                "datasetsPartialFields": [
-                                    [
-                                        {
-                                            "guid": "a7ada7c0-ad75-11f0-bd90-472eac6f2805",
-                                            "title": "max_cohort_value",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "7bb51810-ad75-11f0-bd90-472eac6f2805",
-                                            "title": "values",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
-                                            "title": "%_values",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "23566930-ab59-11f0-864e-7555cf0e0fb2",
-                                            "title": "filter_date",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2",
-                                            "title": "purchase_month",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "cb015f40-ab55-11f0-8bf9-3590e82fd31a",
-                                            "title": "diff_years",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a",
-                                            "title": "diff_months",
-                                            "calc_mode": "formula"
-                                        },
-                                        {
-                                            "guid": "end_period",
-                                            "title": "end_period",
-                                            "calc_mode": "parameter"
-                                        },
-                                        {
-                                            "guid": "start_date",
-                                            "title": "start_date",
-                                            "calc_mode": "parameter"
-                                        },
-                                        {
-                                            "guid": "end_date",
-                                            "title": "end_date",
-                                            "calc_mode": "parameter"
-                                        },
-                                        {
-                                            "guid": "client_id_3d2i",
-                                            "title": "client_id",
-                                            "calc_mode": "direct"
-                                        },
-                                        {
-                                            "guid": "purchase_min_date_fass",
-                                            "title": "purchase_min_date",
-                                            "calc_mode": "direct"
-                                        },
-                                        {
-                                            "guid": "purchase_date_n7ct",
-                                            "title": "purchase_date",
-                                            "calc_mode": "direct"
-                                        }
-                                    ]
-                                ]
-                            }
-                        },
-                        "name": "Анализ клиентов - Таблица. Когортный анализ",
-                        "type": "table_wizard_node",
-                        "annotation": {
-                            "description": ""
-                        }
-                    }
-                },
-                "46": {
-                    "widget": {
-                        "data": {
-                            "shared": {
-                                "sort": [],
-                                "type": "datalens",
-                                "links": [],
-                                "colors": [],
-                                "labels": [],
-                                "shapes": [],
-                                "filters": [],
-                                "updates": [
-                                    {
-                                        "field": {
-                                            "cast": "float",
                                             "guid": "0dcb3a50-aa55-11f0-8c7c-59e14d3324ab",
                                             "type": "MEASURE",
                                             "local": true,
@@ -19753,7 +19309,7 @@
                         }
                     }
                 },
-                "47": {
+                "46": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -20040,7 +19596,7 @@
                         }
                     }
                 },
-                "48": {
+                "47": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -20520,7 +20076,7 @@
                         }
                     }
                 },
-                "49": {
+                "48": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -20998,7 +20554,7 @@
                         }
                     }
                 },
-                "50": {
+                "49": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -21515,7 +21071,7 @@
                         }
                     }
                 },
-                "52": {
+                "51": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -21993,7 +21549,7 @@
                         }
                     }
                 },
-                "53": {
+                "52": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -22528,7 +22084,7 @@
                         }
                     }
                 },
-                "54": {
+                "53": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -22817,7 +22373,7 @@
                         }
                     }
                 },
-                "55": {
+                "54": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -22828,7 +22384,7 @@
                                         "title": "abc-xyz",
                                         "source": "",
                                         "data_type": "markup",
-                                        "datasetId": "51",
+                                        "datasetId": "50",
                                         "direction": "ASC"
                                     },
                                     {
@@ -22837,7 +22393,7 @@
                                         "title": "min_abc_revenue",
                                         "source": "",
                                         "data_type": "markup",
-                                        "datasetId": "51",
+                                        "datasetId": "50",
                                         "direction": "DESC"
                                     },
                                     {
@@ -22846,7 +22402,7 @@
                                         "title": "min_abc_quantity",
                                         "source": "",
                                         "data_type": "markup",
-                                        "datasetId": "51",
+                                        "datasetId": "50",
                                         "direction": "DESC"
                                     }
                                 ],
@@ -22871,7 +22427,7 @@
                                             "virtual": false,
                                             "calc_mode": "formula",
                                             "data_type": "markup",
-                                            "datasetId": "51",
+                                            "datasetId": "50",
                                             "managed_by": "user",
                                             "aggregation": "none",
                                             "description": "",
@@ -22900,7 +22456,7 @@
                                             "virtual": false,
                                             "calc_mode": "formula",
                                             "data_type": "markup",
-                                            "datasetId": "51",
+                                            "datasetId": "50",
                                             "managed_by": "user",
                                             "aggregation": "none",
                                             "description": "",
@@ -22929,7 +22485,7 @@
                                             "virtual": false,
                                             "calc_mode": "formula",
                                             "data_type": "markup",
-                                            "datasetId": "51",
+                                            "datasetId": "50",
                                             "managed_by": "user",
                                             "aggregation": "none",
                                             "description": "",
@@ -22957,7 +22513,7 @@
                                             "virtual": false,
                                             "calc_mode": "formula",
                                             "data_type": "markup",
-                                            "datasetId": "51",
+                                            "datasetId": "50",
                                             "fakeTitle": "ABC",
                                             "managed_by": "user",
                                             "aggregation": "none",
@@ -22999,7 +22555,7 @@
                                 "segments": [],
                                 "tooltips": [],
                                 "datasetsIds": [
-                                    "51"
+                                    "50"
                                 ],
                                 "hierarchies": [],
                                 "colorsConfig": {},
@@ -23054,7 +22610,7 @@
                                                     "avatar_id": "5595f890-ab84-11f0-a2ee-cd085a2dd49b",
                                                     "calc_mode": "direct",
                                                     "data_type": "integer",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "Товар",
                                                     "formatting": {
                                                         "format": "number",
@@ -23107,7 +22663,7 @@
                                                     "avatar_id": "5595f890-ab84-11f0-a2ee-cd085a2dd49b",
                                                     "calc_mode": "direct",
                                                     "data_type": "float",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "Количество",
                                                     "formatting": {
                                                         "format": "number",
@@ -23178,7 +22734,7 @@
                                                     "avatar_id": "5595f890-ab84-11f0-a2ee-cd085a2dd49b",
                                                     "calc_mode": "direct",
                                                     "data_type": "float",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "Выручка",
                                                     "formatting": {
                                                         "format": "number",
@@ -23249,7 +22805,7 @@
                                                     "avatar_id": "5595f890-ab84-11f0-a2ee-cd085a2dd49b",
                                                     "calc_mode": "direct",
                                                     "data_type": "float",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "Скидка",
                                                     "formatting": {
                                                         "format": "number",
@@ -23319,7 +22875,7 @@
                                                     "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "float",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "% скидки",
                                                     "formatting": {
                                                         "format": "percent",
@@ -23390,7 +22946,7 @@
                                                     "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "markup",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "ABC Количество",
                                                     "formatting": {
                                                         "format": "number",
@@ -23451,7 +23007,7 @@
                                                     "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "markup",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "ABC Выручка",
                                                     "formatting": {
                                                         "format": "number",
@@ -23512,7 +23068,7 @@
                                                     "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "markup",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "managed_by": "user",
                                                     "aggregation": "none",
                                                     "datasetName": "ABC-анализ",
@@ -23542,7 +23098,7 @@
                                                     "avatar_id": null,
                                                     "calc_mode": "formula",
                                                     "data_type": "markup",
-                                                    "datasetId": "51",
+                                                    "datasetId": "50",
                                                     "fakeTitle": "ABC",
                                                     "formatting": {
                                                         "format": "number",
@@ -23699,7 +23255,7 @@
                         }
                     }
                 },
-                "56": {
+                "55": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -23985,7 +23541,7 @@
                         }
                     }
                 },
-                "57": {
+                "56": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -24271,7 +23827,7 @@
                         }
                     }
                 },
-                "58": {
+                "57": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -24821,7 +24377,7 @@
                         }
                     }
                 },
-                "59": {
+                "58": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -25358,7 +24914,7 @@
                         }
                     }
                 },
-                "60": {
+                "59": {
                     "widget": {
                         "data": {
                             "shared": {
@@ -25902,6 +25458,446 @@
                         },
                         "name": "Общие продажи и тренды - Линейная. Средний чек по клиенту",
                         "type": "graph_wizard_node",
+                        "annotation": {
+                            "description": ""
+                        }
+                    }
+                },
+                "60": {
+                    "widget": {
+                        "data": {
+                            "shared": {
+                                "sort": [],
+                                "type": "datalens",
+                                "links": [],
+                                "colors": [],
+                                "labels": [],
+                                "shapes": [],
+                                "filters": [],
+                                "updates": [
+                                    {
+                                        "field": {
+                                            "cast": "float",
+                                            "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
+                                            "type": "MEASURE",
+                                            "local": true,
+                                            "title": "%_values",
+                                            "valid": true,
+                                            "hidden": false,
+                                            "source": "",
+                                            "formula": "[values]/[max_cohort_value]",
+                                            "virtual": false,
+                                            "calc_mode": "formula",
+                                            "data_type": "float",
+                                            "datasetId": "44",
+                                            "managed_by": "user",
+                                            "aggregation": "none",
+                                            "description": "",
+                                            "ui_settings": "",
+                                            "guid_formula": "[7bb51810-ad75-11f0-bd90-472eac6f2805]/[a7ada7c0-ad75-11f0-bd90-472eac6f2805]",
+                                            "autoaggregated": true,
+                                            "lock_aggregation": false,
+                                            "initial_data_type": "float",
+                                            "aggregation_locked": true,
+                                            "has_auto_aggregation": true
+                                        },
+                                        "action": "add_field"
+                                    },
+                                    {
+                                        "field": {
+                                            "cast": "integer",
+                                            "guid": "7bb51810-ad75-11f0-bd90-472eac6f2805",
+                                            "type": "MEASURE",
+                                            "local": true,
+                                            "title": "values",
+                                            "valid": true,
+                                            "hidden": false,
+                                            "source": "",
+                                            "formula": "COUNTD([client_id])",
+                                            "virtual": false,
+                                            "calc_mode": "formula",
+                                            "data_type": "integer",
+                                            "datasetId": "44",
+                                            "managed_by": "user",
+                                            "aggregation": "none",
+                                            "description": "",
+                                            "ui_settings": "",
+                                            "guid_formula": "COUNTD([client_id_3d2i])",
+                                            "autoaggregated": true,
+                                            "lock_aggregation": false,
+                                            "initial_data_type": "integer",
+                                            "aggregation_locked": true,
+                                            "has_auto_aggregation": true
+                                        },
+                                        "action": "add_field",
+                                        "debug_info": "merged-update"
+                                    },
+                                    {
+                                        "field": {
+                                            "cast": "integer",
+                                            "guid": "a7ada7c0-ad75-11f0-bd90-472eac6f2805",
+                                            "type": "MEASURE",
+                                            "local": true,
+                                            "title": "max_cohort_value",
+                                            "valid": true,
+                                            "hidden": false,
+                                            "source": "",
+                                            "formula": "MAX(COUNTD([client_id]) WITHIN [purchase_month])",
+                                            "virtual": false,
+                                            "calc_mode": "formula",
+                                            "data_type": "integer",
+                                            "datasetId": "44",
+                                            "managed_by": "user",
+                                            "aggregation": "none",
+                                            "description": "",
+                                            "ui_settings": "",
+                                            "guid_formula": "MAX(COUNTD([client_id_3d2i]) WITHIN [b558d3c0-ab56-11f0-864e-7555cf0e0fb2])",
+                                            "autoaggregated": true,
+                                            "lock_aggregation": false,
+                                            "initial_data_type": "integer",
+                                            "aggregation_locked": true,
+                                            "has_auto_aggregation": true
+                                        },
+                                        "action": "add_field",
+                                        "debug_info": "merged-update"
+                                    }
+                                ],
+                                "version": "14",
+                                "segments": [],
+                                "tooltips": [],
+                                "datasetsIds": [
+                                    "44"
+                                ],
+                                "hierarchies": [],
+                                "colorsConfig": {},
+                                "shapesConfig": {},
+                                "extraSettings": {
+                                    "feed": "",
+                                    "title": "Анализ клиентов - Таблица. Когортный анализ",
+                                    "totals": "off",
+                                    "stacking": "on",
+                                    "zoomMode": "auto",
+                                    "titleMode": "hide",
+                                    "legendMode": "show",
+                                    "tooltipSum": "on",
+                                    "mapCenterMode": "auto",
+                                    "pivotFallback": "off",
+                                    "pivotInlineSort": "on",
+                                    "navigatorSettings": {
+                                        "selectedLines": [],
+                                        "isNavigatorAvailable": false
+                                    },
+                                    "indicatorTitleMode": "by-field"
+                                },
+                                "visualization": {
+                                    "id": "pivotTable",
+                                    "name": "label_visualization-pivot-table",
+                                    "type": "table",
+                                    "allowSort": true,
+                                    "iconProps": {
+                                        "id": "visPivot",
+                                        "width": "24"
+                                    },
+                                    "allowColors": true,
+                                    "allowFilters": true,
+                                    "placeholders": [
+                                        {
+                                            "id": "pivot-table-columns",
+                                            "type": "pivot-table-columns",
+                                            "items": [
+                                                {
+                                                    "id": "dimension-6",
+                                                    "cast": "integer",
+                                                    "guid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a",
+                                                    "type": "DIMENSION",
+                                                    "title": "diff_months",
+                                                    "valid": true,
+                                                    "hidden": false,
+                                                    "source": "",
+                                                    "formula": "DATEPART(DATE(INT([purchase_date])-INT([purchase_min_date])), 'month') + [diff_years]*12",
+                                                    "virtual": false,
+                                                    "avatar_id": null,
+                                                    "calc_mode": "formula",
+                                                    "data_type": "integer",
+                                                    "datasetId": "44",
+                                                    "fakeTitle": "Количество месяцев с первой покупки",
+                                                    "formatting": {
+                                                        "format": "number",
+                                                        "prefix": "",
+                                                        "postfix": "",
+                                                        "labelMode": "absolute",
+                                                        "precision": 0,
+                                                        "showRankDelimiter": true
+                                                    },
+                                                    "managed_by": "user",
+                                                    "aggregation": "none",
+                                                    "datasetName": "Когортный анализ",
+                                                    "description": "",
+                                                    "ui_settings": "",
+                                                    "guid_formula": "DATEPART(DATE(INT([purchase_date_n7ct])-INT([purchase_min_date_fass])), 'month') + [cb015f40-ab55-11f0-8bf9-3590e82fd31a]*12",
+                                                    "default_value": null,
+                                                    "hideLabelMode": "show",
+                                                    "autoaggregated": false,
+                                                    "lock_aggregation": false,
+                                                    "value_constraint": null,
+                                                    "initial_data_type": "integer",
+                                                    "subTotalsSettings": {
+                                                        "enabled": false
+                                                    },
+                                                    "aggregation_locked": true,
+                                                    "backgroundSettings": {
+                                                        "enabled": false,
+                                                        "settings": {
+                                                            "isContinuous": false,
+                                                            "paletteState": {
+                                                                "palette": "",
+                                                                "mountedColors": {}
+                                                            },
+                                                            "gradientState": {}
+                                                        },
+                                                        "settingsId": "bb867620-ad91-11f0-bdb4-4ddb9de3a292",
+                                                        "colorFieldGuid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a"
+                                                    },
+                                                    "has_auto_aggregation": false
+                                                }
+                                            ],
+                                            "title": "section_columns",
+                                            "settings": {},
+                                            "iconProps": {},
+                                            "allowedTypes": {},
+                                            "allowedDataTypes": {}
+                                        },
+                                        {
+                                            "id": "rows",
+                                            "type": "rows",
+                                            "items": [
+                                                {
+                                                    "id": "dimension-4",
+                                                    "cast": "string",
+                                                    "guid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2",
+                                                    "type": "DIMENSION",
+                                                    "title": "purchase_month",
+                                                    "valid": true,
+                                                    "hidden": false,
+                                                    "source": "",
+                                                    "formula": "IF MONTH([purchase_min_date]) <= 9\r\nTHEN\r\n    STR(YEAR([purchase_min_date])) + '-0' + STR(MONTH([purchase_min_date]))\r\nELSE\r\n    STR(YEAR([purchase_min_date])) + '-' + STR(MONTH([purchase_min_date]))\r\nEND",
+                                                    "virtual": false,
+                                                    "avatar_id": null,
+                                                    "calc_mode": "formula",
+                                                    "data_type": "string",
+                                                    "datasetId": "44",
+                                                    "fakeTitle": "Когорта (месяц)",
+                                                    "formatting": {
+                                                        "format": "number",
+                                                        "prefix": "",
+                                                        "postfix": "",
+                                                        "labelMode": "absolute",
+                                                        "precision": 0,
+                                                        "showRankDelimiter": true
+                                                    },
+                                                    "managed_by": "user",
+                                                    "aggregation": "none",
+                                                    "datasetName": "Когортный анализ",
+                                                    "description": "",
+                                                    "ui_settings": "",
+                                                    "guid_formula": "IF MONTH([purchase_min_date_fass]) <= 9\r\nTHEN\r\n    STR(YEAR([purchase_min_date_fass])) + '-0' + STR(MONTH([purchase_min_date_fass]))\r\nELSE\r\n    STR(YEAR([purchase_min_date_fass])) + '-' + STR(MONTH([purchase_min_date_fass]))\r\nEND",
+                                                    "default_value": null,
+                                                    "hideLabelMode": "show",
+                                                    "autoaggregated": false,
+                                                    "lock_aggregation": false,
+                                                    "value_constraint": null,
+                                                    "initial_data_type": "string",
+                                                    "subTotalsSettings": {
+                                                        "enabled": false
+                                                    },
+                                                    "aggregation_locked": true,
+                                                    "backgroundSettings": {
+                                                        "enabled": false,
+                                                        "settings": {
+                                                            "isContinuous": false,
+                                                            "paletteState": {
+                                                                "palette": "",
+                                                                "mountedColors": {}
+                                                            },
+                                                            "gradientState": {}
+                                                        },
+                                                        "settingsId": "b167fa10-ad91-11f0-bdb4-4ddb9de3a292",
+                                                        "colorFieldGuid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2"
+                                                    },
+                                                    "has_auto_aggregation": false
+                                                }
+                                            ],
+                                            "title": "section_rows",
+                                            "settings": {},
+                                            "iconProps": {},
+                                            "allowedDataTypes": {}
+                                        },
+                                        {
+                                            "id": "measures",
+                                            "type": "measures",
+                                            "items": [
+                                                {
+                                                    "id": "measure-2",
+                                                    "cast": "float",
+                                                    "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
+                                                    "type": "MEASURE",
+                                                    "local": true,
+                                                    "title": "%_values",
+                                                    "valid": true,
+                                                    "hidden": false,
+                                                    "source": "",
+                                                    "formula": "[values]/[max_cohort_value]",
+                                                    "virtual": false,
+                                                    "avatar_id": null,
+                                                    "calc_mode": "formula",
+                                                    "data_type": "float",
+                                                    "datasetId": "44",
+                                                    "fakeTitle": "% от первого периода",
+                                                    "formatting": {
+                                                        "format": "percent",
+                                                        "prefix": "",
+                                                        "postfix": "",
+                                                        "labelMode": "absolute",
+                                                        "precision": 1,
+                                                        "showRankDelimiter": true
+                                                    },
+                                                    "managed_by": "user",
+                                                    "aggregation": "none",
+                                                    "datasetName": "Когортный анализ",
+                                                    "description": "",
+                                                    "ui_settings": "",
+                                                    "barsSettings": {
+                                                        "align": "default",
+                                                        "scale": {
+                                                            "mode": "auto"
+                                                        },
+                                                        "enabled": false,
+                                                        "showLabels": true,
+                                                        "colorSettings": {
+                                                            "settings": {
+                                                                "negativeColorIndex": 1,
+                                                                "positiveColorIndex": 2
+                                                            },
+                                                            "colorType": "two-color"
+                                                        },
+                                                        "showBarsInTotals": false
+                                                    },
+                                                    "guid_formula": "[7bb51810-ad75-11f0-bd90-472eac6f2805]/[a7ada7c0-ad75-11f0-bd90-472eac6f2805]",
+                                                    "default_value": null,
+                                                    "hideLabelMode": "show",
+                                                    "autoaggregated": true,
+                                                    "lock_aggregation": false,
+                                                    "value_constraint": null,
+                                                    "initial_data_type": "float",
+                                                    "aggregation_locked": true,
+                                                    "backgroundSettings": {
+                                                        "enabled": true,
+                                                        "settings": {
+                                                            "isContinuous": true,
+                                                            "paletteState": {},
+                                                            "gradientState": {
+                                                                "reversed": false,
+                                                                "gradientMode": "3-point",
+                                                                "leftThreshold": "0",
+                                                                "rightThreshold": "0.15",
+                                                                "thresholdsMode": "manual",
+                                                                "gradientPalette": "red-orange-green",
+                                                                "middleThreshold": "0.07"
+                                                            }
+                                                        },
+                                                        "settingsId": "e3d23e60-ad79-11f0-8c0c-5b3e50c599e8",
+                                                        "colorFieldGuid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8"
+                                                    },
+                                                    "has_auto_aggregation": true
+                                                }
+                                            ],
+                                            "title": "section_measures",
+                                            "settings": {
+                                                "axisModeMap": {
+                                                    "d79687a0-ad79-11f0-8c0c-5b3e50c599e8": "discrete"
+                                                }
+                                            },
+                                            "iconProps": {},
+                                            "allowedTypes": {},
+                                            "allowedFinalTypes": {}
+                                        }
+                                    ],
+                                    "allowLayerFilters": false
+                                },
+                                "geopointsConfig": {},
+                                "datasetsPartialFields": [
+                                    [
+                                        {
+                                            "guid": "a7ada7c0-ad75-11f0-bd90-472eac6f2805",
+                                            "title": "max_cohort_value",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "7bb51810-ad75-11f0-bd90-472eac6f2805",
+                                            "title": "values",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "d79687a0-ad79-11f0-8c0c-5b3e50c599e8",
+                                            "title": "%_values",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "23566930-ab59-11f0-864e-7555cf0e0fb2",
+                                            "title": "filter_date",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "b558d3c0-ab56-11f0-864e-7555cf0e0fb2",
+                                            "title": "purchase_month",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "cb015f40-ab55-11f0-8bf9-3590e82fd31a",
+                                            "title": "diff_years",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a",
+                                            "title": "diff_months",
+                                            "calc_mode": "formula"
+                                        },
+                                        {
+                                            "guid": "end_period",
+                                            "title": "end_period",
+                                            "calc_mode": "parameter"
+                                        },
+                                        {
+                                            "guid": "start_date",
+                                            "title": "start_date",
+                                            "calc_mode": "parameter"
+                                        },
+                                        {
+                                            "guid": "end_date",
+                                            "title": "end_date",
+                                            "calc_mode": "parameter"
+                                        },
+                                        {
+                                            "guid": "client_id_3d2i",
+                                            "title": "client_id",
+                                            "calc_mode": "direct"
+                                        },
+                                        {
+                                            "guid": "purchase_min_date_fass",
+                                            "title": "purchase_min_date",
+                                            "calc_mode": "direct"
+                                        },
+                                        {
+                                            "guid": "purchase_date_n7ct",
+                                            "title": "purchase_date",
+                                            "calc_mode": "direct"
+                                        }
+                                    ]
+                                ]
+                            }
+                        },
+                        "name": "Анализ клиентов - Таблица. Когортный анализ",
+                        "type": "table_wizard_node",
                         "annotation": {
                             "description": ""
                         }
@@ -27949,8 +27945,8 @@
                                     {
                                         "dep_field_id": "b92b2df0-ab55-11f0-8bf9-3590e82fd31a",
                                         "ref_field_ids": [
-                                            "purchase_date_n7ct",
                                             "cb015f40-ab55-11f0-8bf9-3590e82fd31a",
+                                            "purchase_date_n7ct",
                                             "purchase_min_date_fass"
                                         ]
                                     },
@@ -27963,16 +27959,16 @@
                                     {
                                         "dep_field_id": "23566930-ab59-11f0-864e-7555cf0e0fb2",
                                         "ref_field_ids": [
-                                            "end_date",
                                             "purchase_date_n7ct",
+                                            "end_date",
                                             "start_date"
                                         ]
                                     },
                                     {
                                         "dep_field_id": "cb015f40-ab55-11f0-8bf9-3590e82fd31a",
                                         "ref_field_ids": [
-                                            "purchase_date_n7ct",
-                                            "purchase_min_date_fass"
+                                            "purchase_min_date_fass",
+                                            "purchase_date_n7ct"
                                         ]
                                     }
                                 ]
@@ -27983,7 +27979,7 @@
                         "load_preview_by_default": true
                     }
                 },
-                "51": {
+                "50": {
                     "dataset": {
                         "name": "ABC-анализ",
                         "rls2": {},
@@ -28722,7 +28718,7 @@
                                                         "hint": "",
                                                         "title": "Количество заказов. Тренд",
                                                         "params": {},
-                                                        "chartId": "59",
+                                                        "chartId": "58",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -28772,7 +28768,7 @@
                                                         "hint": "",
                                                         "title": "Количество единиц товаров. Тренд",
                                                         "params": {},
-                                                        "chartId": "58",
+                                                        "chartId": "57",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -28816,8 +28812,8 @@
                                         {
                                             "id": "NM",
                                             "data": {
-                                                "text": "#### **Цель вкладки:** \n\nДать общую картину состояния бизнеса, показать ключевые метрики и их динамику во времени. Это \"дашборд для руководителя\", который отвечает на вопрос \"Как идут наши продажи в целом?\".",
-                                                "autoHeight": false,
+                                                "text": "#### **Цель вкладки:**\n\nДать общую картину состояния бизнеса, показать ключевые метрики и их динамику во времени. Это \"дашборд для руководителя\", который отвечает на вопрос \"Как идут наши продажи в целом?\".\n\n**{blue}(Это окно можно свернуть, нажав на синюю кнопку справа)**",
+                                                "autoHeight": true,
                                                 "background": {
                                                     "color": "",
                                                     "enabled": true
@@ -28835,7 +28831,7 @@
                                                         "hint": "",
                                                         "title": "Общие продажи и тренды - Линейная. Средний чек по клиенту",
                                                         "params": {},
-                                                        "chartId": "60",
+                                                        "chartId": "59",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -29355,7 +29351,7 @@
                                                         "hint": "",
                                                         "title": "Общие продажи и тренды - KPI. Количество товара (Неделя)",
                                                         "params": {},
-                                                        "chartId": "53",
+                                                        "chartId": "52",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30047,7 +30043,7 @@
                                         {
                                             "id": "A2W",
                                             "data": {
-                                                "text": "#### **Цель вкладки:**\n\nПонять портрет и поведение клиентской базы. Ответить на вопросы \"Кто наши клиенты?\" и \"Насколько они лояльны?\"\n\nВ списках Топ покупателей по количеству заказов и по сумме затрат можно  менять количество значений с помощью соответствующего селектора.\n\n*Особенность таблицы RFM-анализа в том, что она формируется \"на лету\" по SQL-запросу к БД, учитывая параметры ПЕРИОДА. То есть выдаёт актуальный результат на заданный период в дашборде.*\n\n*Когортный анализ формируется \"на лету\" по SQL-запросу, учитывая параметры ПЕРИОДА. **Сам анализ строит помесячные когорты, так как покупки сами по себе дорогие и нечастые. Показывает % уникальных клиентов от первого периода.***\n\n*LTV также* *формируется \"на лету\" по SQL-запросу, учитывая параметры ПЕРИОДА. **Сам анализ строит помесячные когорты, так как покупки сами по себе дорогие и нечастые. Показывает среднюю выручку на уникального клиента.***\n\n***Настроена пагинация таблицы по 100 строк, чтобы чарт отображался быстрее.***",
+                                                "text": "#### **Цель вкладки:**\n\nПонять портрет и поведение клиентской базы. Ответить на вопросы \"Кто наши клиенты?\" и \"Насколько они лояльны?\"\n\nВ списках Топ покупателей по количеству заказов и по сумме затрат можно  менять количество значений с помощью соответствующего селектора.\n\n*Особенность таблицы RFM-анализа в том, что она формируется \"на лету\" по SQL-запросу к БД, учитывая параметры ПЕРИОДА. То есть выдаёт актуальный результат на заданный период в дашборде.*\n\n*Когортный анализ формируется \"на лету\" по SQL-запросу, учитывая параметры ПЕРИОДА. **Сам анализ строит помесячные когорты, так как покупки сами по себе дорогие и нечастые. Показывает % уникальных клиентов от первого периода.***\n\n*LTV также* *формируется \"на лету\" по SQL-запросу, учитывая параметры ПЕРИОДА. **Сам анализ строит помесячные когорты, так как покупки сами по себе дорогие и нечастые. Показывает среднюю выручку на уникального клиента.***\n\n***Настроена пагинация таблицы по 100 строк, чтобы чарт отображался быстрее.***\n\n**{blue}(Это окно можно свернуть, нажав на синюю кнопку справа)**",
                                                 "autoHeight": true,
                                                 "background": {
                                                     "color": "transparent",
@@ -30236,7 +30232,7 @@
                                                         "hint": "**Когортный анализ** — это метод, который позволяет оценить поведение реальных и потенциальных клиентов бренда в динамике. ",
                                                         "title": "Когортный анализ покупателей",
                                                         "params": {},
-                                                        "chartId": "45",
+                                                        "chartId": "60",
                                                         "isDefault": true,
                                                         "autoHeight": true,
                                                         "background": {
@@ -30614,7 +30610,7 @@
                                         {
                                             "id": "g3W",
                                             "data": {
-                                                "text": "#### **Цель вкладки:**\n\nОценить эффективность товарного ассортимента. Ответить на вопросы \"Какие товары продаются хорошо?\", \"На каких товарах мы больше всего зарабатываем?\" и \"Какие товары неликвидны?\".\n\nВ списках Топ и Антитоп можно менять количество значений с помощью соответствующего селектора.\n\n*Особенность таблицы ABC/XYZ-анализа в том, что она формируется \"на лету\" по SQL-запросу к БД, учитывая параметры ПЕРИОДА и МАСШТАБА. То есть выдаёт актуальный результат на заданный период в дашборде.*\n\n***Настроена пагинация таблицы по 100 строк, чтобы чарт отображался быстрее.***",
+                                                "text": "#### **Цель вкладки:**\n\nОценить эффективность товарного ассортимента. Ответить на вопросы \"Какие товары продаются хорошо?\", \"На каких товарах мы больше всего зарабатываем?\" и \"Какие товары неликвидны?\".\n\nВ списках Топ и Антитоп можно менять количество значений с помощью соответствующего селектора.\n\n*Особенность таблицы ABC/XYZ-анализа в том, что она формируется \"на лету\" по SQL-запросу к БД, учитывая параметры ПЕРИОДА и МАСШТАБА. То есть выдаёт актуальный результат на заданный период в дашборде.*\n\n***Настроена пагинация таблицы по 100 строк, чтобы чарт отображался быстрее.***\n\n**{blue}(Это окно можно свернуть, нажав на синюю кнопку справа)**",
                                                 "autoHeight": true,
                                                 "background": {
                                                     "color": "transparent",
@@ -30633,7 +30629,7 @@
                                                         "hint": "Количество уникальных товаров за выбранный период",
                                                         "title": "Ассортимент товаров за период",
                                                         "params": {},
-                                                        "chartId": "54",
+                                                        "chartId": "53",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30658,7 +30654,7 @@
                                                         "hint": "Общая сумма предоставленных скидок",
                                                         "title": "Сумма предоставленных скидок",
                                                         "params": {},
-                                                        "chartId": "46",
+                                                        "chartId": "45",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30683,7 +30679,7 @@
                                                         "hint": "##SUM(\\[quantity\\] \\* (\\[price\\_per\\_item\\] - \\[discount\\_per\\_item\\]))##",
                                                         "title": "Товарооборот",
                                                         "params": {},
-                                                        "chartId": "47",
+                                                        "chartId": "46",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30778,7 +30774,7 @@
                                                         "hint": "",
                                                         "title": "Топ товаров по покупкам",
                                                         "params": {},
-                                                        "chartId": "48",
+                                                        "chartId": "47",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30803,7 +30799,7 @@
                                                         "hint": "",
                                                         "title": "Топ товаров по сумме продаж",
                                                         "params": {},
-                                                        "chartId": "52",
+                                                        "chartId": "51",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30828,7 +30824,7 @@
                                                         "hint": "",
                                                         "title": "Антитоп товаров по покупкам",
                                                         "params": {},
-                                                        "chartId": "50",
+                                                        "chartId": "49",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30853,7 +30849,7 @@
                                                         "hint": "",
                                                         "title": "Антитоп товаров по сумме продаж",
                                                         "params": {},
-                                                        "chartId": "49",
+                                                        "chartId": "48",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30878,7 +30874,7 @@
                                                         "hint": "**ABC/XYZ-анализ** — это кросс-метод, который объединяет два вида анализа: **ABC** и **XYZ**. Он позволяет разделить объекты исследования (товары, поставщиков, покупателей) на группы по их важности для бизнеса (ABC) и стабильности спроса или потребления (XYZ).",
                                                         "title": "ABC/XYZ-анализ",
                                                         "params": {},
-                                                        "chartId": "55",
+                                                        "chartId": "54",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30903,7 +30899,7 @@
                                                         "hint": "##SUM(\\[quantity\\]) / COUNTD(\\[product\\_id\\])##",
                                                         "title": "Среднее кол-во продаж на товар",
                                                         "params": {},
-                                                        "chartId": "56",
+                                                        "chartId": "55",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -30928,7 +30924,7 @@
                                                         "hint": "##COUNTD(\\[client\\_id\\]) / COUNTD(\\[product\\_id\\])##",
                                                         "title": "Среднее кол-во покупателей на товар",
                                                         "params": {},
-                                                        "chartId": "57",
+                                                        "chartId": "56",
                                                         "isDefault": true,
                                                         "autoHeight": false,
                                                         "background": {
@@ -31312,5 +31308,5 @@
             }
         }
     },
-    "hash": "d202da3e351b8bed41db7d52a47adae7fc9c1142579fc075a7131962e35472c7"
+    "hash": "9bb2ef776cf16e8309f689bef464555c5523b1cfdc902a6be2809cf23e656888"
 }
