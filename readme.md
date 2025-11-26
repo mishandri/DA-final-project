@@ -66,6 +66,8 @@ da-final-project/
 
 [Дашборд в Yandex.DataLens (тёмная тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=dark)      |       [Дашборд в Yandex.DataLens(светлая тема)](https://datalens.yandex/6eiukr5xyukyr?_theme=light)      |       [Исследование продаж 2023 года](DataAnalysis2023.pdf)
 
+Дашборд был добавлен в качестве примера в [DataLens Gallery](https://datalens.ru/gallery/gx1h48lns7le1).
+
 # Примечения
 
 - Корректность данных и их заполнения производится на уровне PostgreSQL:
